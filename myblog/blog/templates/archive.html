@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My_blog</title>
+</head>
+
+<body>
+<from action="/blog/create/" method="post">{% csrf_token %}
+    <table>{{ form }}</table><br>
+    <input type="submit">
+</from>
+<hr>
+
+{% for post in posts %}
+    <h2>{{ post.title }} </h2>
+    <p>{{ post.pub_date }}</p>
+    <p>{{ post.body }}</p>
+    <p>{{ post.update_time }}</p>
+    <hr>
+{% endfor %}
+
+</body>
+</html>
