@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>My_blog</title>
+
+    <style>
+        h2 {
+            background-color: rgba(0, 230, 0, 0.2);
+            color: blue;
+            padding: 10px
+        }
+
+        body {
+            color: #272727;
+            font-size: 16px;
+        }
+    </style>
+
 </head>
 
 <body>
-<from action="/blog/create/" method="post">{% csrf_token %}
-    <table>{{ form }}</table><br>
+
+<h3> Welcome {{ name }} </h3>
+
+<form action="/blog/create/" method="post">{% csrf_token %}
+    <talble>{{ form }}</talble><br>
     <input type="submit">
-</from>
+</form>
 <hr>
 
 {% for post in posts %}

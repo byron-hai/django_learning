@@ -24,11 +24,6 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
         exclude = ('pub_date', 'update_time', )
-    #title = forms.CharField(max_length=150)
-    #author = forms.CharField(max_length=60)
-    #body = forms.TextField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 60}))
-    #pub_date = forms.DateTimeField()
-    #update_time = forms.DateTimeField()
 
 
 class UserInfo(models.Model):
