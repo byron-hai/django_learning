@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My_blog</title>
+
+    <style>
+        h2 {
+            background-color: rgba(0, 230, 0, 0.2);
+            color: blue;
+            padding: 10px
+        }
+
+        body {
+            color: #272727;
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h3> Welcome {{ name }} </h3>
+
+<form action="/blog/create/" method="post">{% csrf_token %}
+    <talble>{{ form }}</talble><br>
+    <input type="submit">
+</form>
+<hr>
+
+{% for post in posts %}
+    <h2>{{ post.title }} </h2>
+    <p>{{ post.pub_date }}</p>
+    <p>{{ post.body }}</p>
+    <p>{{ post.update_time }}</p>
+    <hr>
+{% endfor %}
+
+</body>
+</html>

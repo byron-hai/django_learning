@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}learning{% endblock %}
+
+{% block body_main %}
+
+    <div class="sidenav">
+        <ul>
+            <li class="selected"><a href="#">Programing</a></li>
+            <li class><a href="#">language</a></li>
+        </ul>
+    </div>
+
+   <div class="column_right">
+       <p class="title"> Recent posts </p>
+       <h4> Sharing is life</h4>
+       <h5> Author: Mr. NightGost( handwriting style)</h5>
+       <img src="{% static 'images/fly.jpg' %}" alt="my image" width="200"/>
+       <div>
+           <p> bulabulaadvfafa....fdavdvdbf<br>fadafdvaa,.....bulalala</p>
+       </div>
+
+
+    </div>
+
+    <div class="column_main">
+        <div>
+            <h2> Sharing is life</h2>
+            <p>
+                Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div>
+            {% load static %}
+            <img src="{% static 'images/fly.jpg' %}" alt="my image" width="400"/>
+        </div>
+    </div>
+
+
+
+{% endblock %}

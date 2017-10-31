@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}blog{% endblock %}
+
+{% block body_main %}
+
+<div class="sidenav">
+    <ul>
+        <li><a href="#">Reading</a></li>
+        <li><a href="#">Technology</a></li>
+        <li><a href="#">Own's</a></li>
+    </ul>
+</div>
+
+<div class="column_right">
+    <p class="title"> Recent posts </p>
+    <h4> Reading...</h4>
+    <h5> Author: Mr. NightGost( handwriting style)</h5>
+    <img src="{% static 'images/fly.jpg' %}" alt="my image" width="200"/>
+    <div>
+        <p> bulabulaadvfafa....fdavdvdbf<br>fadafdvaa,.....bulalala</p>
+    </div>
+
+    <a href="{% url 'create' %}">New a Blog</a>
+</div>
+
+<div class="column_main">
+    <div>
+        <h2> Reading time's stories</h2>
+        <p>
+            Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+        </p>
+    </div>
+
+    <div>
+        {% load static %}
+        <img src="{% static 'images/reading.jpg' %}" alt="my image" width="400"/>
+    </div>
+
+    <div>
+    {% for post in posts %}
+        <h2>{{ post.title }} </h2>
+        <p>{{ post.pub_date }}</p>
+        <p>{{ post.body }}</p>
+        <p>{{ post.update_time }}</p>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

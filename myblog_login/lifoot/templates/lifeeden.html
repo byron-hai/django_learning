@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} life eden}{% endblock %}
+
+{% block body_main %}
+
+    <div class="sidenav">
+        <ul>
+            <li class="selected"><a href="#">travel</a></li>
+            <li class><a href="#">food</a></li>
+            <li class><a href="#">movies</a></li>
+            <li class><a href="#">music</a></li>
+            <li class><a href="#">albums</a></li>
+        </ul>
+    </div>
+
+    <div class="column_right">
+        <p> Recent post </p>
+    </div>
+
+    <div class="column_main">
+        <div>
+            <h2> Sharing is life</h2>
+            <p>
+                Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div >
+            {% load static %}
+            <img src="{% static 'images/time_steps.jpg' %}" alt="my image" width="400"/>
+        </div>
+    </div>
+
+{% endblock %}
