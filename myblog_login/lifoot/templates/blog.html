@@ -3,16 +3,26 @@
 {% block title %}blog{% endblock %}
 
 {% block body_main %}
+{% load static %}
 
 <div class="sidenav">
-    <ul>
-        <li><a href="#">Reading</a></li>
-        <li><a href="#">Technology</a></li>
-        <li><a href="#">Own's</a></li>
-    </ul>
+    <a href="#">Reading</a>
+    <a href="#">Technology</a>
+    <a href="#">Own's</a>
 </div>
 
 <div class="column_right">
+    <div class="search_box">
+       <h4>Search here</h4>
+       <form action="/" method="post">{% csrf_token %}
+           <input name="search" type="text" value="Search..." />
+       </form>
+       <input type="submit" value="Submit"/>
+    </div>
+    <p class="title">Most Popular</p>
+
+    {% block most_popular %}{% endblock %}
+
     <p class="title"> Recent posts </p>
     <h4> Reading...</h4>
     <h5> Author: Mr. NightGost( handwriting style)</h5>
@@ -25,7 +35,7 @@
 </div>
 
 <div class="column_main">
-    <div>
+    <div class="contents">
         <h2> Reading time's stories</h2>
         <p>
             Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
@@ -33,17 +43,16 @@
     </div>
 
     <div>
-        {% load static %}
-        <img src="{% static 'images/reading.jpg' %}" alt="my image" width="400"/>
+        <img src="{% static 'images/reading.jpg' %}" alt="my image" width="60%"/>
     </div>
 
-    <div>
-    {% for post in posts %}
+    <div class="contents">
+        {% for post in posts %}
         <h2>{{ post.title }} </h2>
         <p>{{ post.pub_date }}</p>
         <p>{{ post.body }}</p>
         <p>{{ post.update_time }}</p>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

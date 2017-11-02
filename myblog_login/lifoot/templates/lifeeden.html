@@ -5,17 +5,27 @@
 {% block body_main %}
 
     <div class="sidenav">
-        <ul>
-            <li class="selected"><a href="#">travel</a></li>
-            <li class><a href="#">food</a></li>
-            <li class><a href="#">movies</a></li>
-            <li class><a href="#">music</a></li>
-            <li class><a href="#">albums</a></li>
-        </ul>
+        <a href="#">travel</a>
+        <a href="#">food</a>
+        <a href="#">movies</a>
+        <a href="#">music</a>
+        <a href="#">albums</a>
     </div>
 
     <div class="column_right">
-        <p> Recent post </p>
+        <div class="search_box">
+           <h4>Search here</h4>
+           <form action="/" method="post">{% csrf_token %}
+               <input name="search" type="text" value="Search..." />
+           </form>
+           <input type="submit" value="Submit"/>
+       </div>
+
+       <p class="title">Most Popular</p>
+
+       {% block most_popular %}{% endblock %}
+
+       <p> Recent post </p>
     </div>
 
     <div class="column_main">

@@ -1,7 +1,11 @@
 /* Layout */
-.body {
-    width: 100%;
-    overflow: hidden;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow: auto;
 }
 
 .header {
@@ -16,8 +20,17 @@
 .header a {
     margin: 40px 40px 0 0;
     float: right;
-
+    text-decoration: none;
+    color: blue;
 }
+
+.header p {
+    padding-left: 60px;
+    color: #adaca5;
+    font-family: 'lucida Grande', Tahoma, Arial, Helvetica, sanpserif;
+    font-size: 16px;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -26,11 +39,12 @@
 
 .topnav a {
     float: left;
-    width: 88px;
+    width: 120px;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 20px;
+    font-size: 18px;
+    padding: 14px 30px;
     text-decoration: none;
 }
 
@@ -40,29 +54,26 @@
 }
 
 .main_body {
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 100%;
-    text-align: left;
-    padding: 60px 60px 60px 60px;
+    position: relative;
+    margin: 60px 12% 0 12%;
 }
 
 /* 36% for description, 60% for a pic */
 .column_home1 {
     float: left;
-    width: 36%;
-    padding-left: 40px;
-    margin-top: 60px;
+    width: 40%;
+    text-align: left;
+    padding: 20px 20px 20px 20px;
 }
 
 .column_home2 {
-    float: right;
-    width: 40%;
-    padding:20px;
-   margin-top: 60px;
+    float: left;
+    width: 60%;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
 }
 
-.row {
+.row:after {
     content: "";
     display: table;
     clear: both;
@@ -70,40 +81,26 @@
 
 .sidenav {
     float: left;
-    height: 400px;
-    width: 13%;
-    padding-top: 40px;
-    padding-left: 5px;
-    background-color: #f1f1f1;
+    width: 200px;
+    padding: 20px 10px;
+    text-align: left;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
 }
 
 .sidenav a {
+    display: block;
     text-decoration: none;
     color: black;
-    padding-left: 5px;
+    padding: 6px 6px 6px 10px;
+    border-radius: 8px;
 }
 
-.bottom_nav {
-    list-style-type: none;
-    display: inline-block;
-
-}
-
-.sidenav ul li {
-    list-style-type: none;
-    display: block;
-    padding: 10px;
-    border-bottom: 4px solid #f1f1f1;
-}
-
-
-div ul li:hover {
+.sidenav a:hover {
     background: white;
+    color: #4A4AFF;
     transition: linear all 0.40s;
-}
-
-.selected {
-    background: white;
 }
 
 .selected a {
@@ -111,44 +108,69 @@ div ul li:hover {
 }
 
 .column_main {
-    width: 60%;
-    padding: 20px 20px 20px 20px;
-    margin-top: 60px;
-    text-align: center;
+    width: auto;
+    margin: 60px 20% 0 16%;
+    text-align: left;
+    padding: 20px;
 }
+
 
 .column_right {
     float: right;
-    width: 20%;
+    width: 24%;
     text-align: center;
-    padding: 40px 20px 40px 20px;
+    padding: 20px;
     background-color: #f8f8f8;
+    border-radius: 8px;
 }
 
 .column_right .title {
     text-align: left;
-    font-size: 18px;
+    font-size: 16px;
 }
 
+.search_box {
+    text-align: left;
+}
 
-#footer {
+.search_box input {
+    margin-bottom: 10px;
+}
+
+.footer {
     background-color: black;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     color: white;
     font-size: 12px;
-    height: 80px;
+    height: 120px;
     border-radius: 0 0 8px 8px;
     margin-top: 40px;
 }
 
+.footer ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0 20px 0 20px;
+}
+
+.footer a {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    background-color: white;
+    color: black;
+}
 /* Layout end */
 
 
 #signup_body {
     background-color: white;
     padding: 60px;
-    margin-top: 5%;
+    margin-top: 8%;
     margin-left: 30%;
     margin-right: 30%;
 }
@@ -161,6 +183,13 @@ div ul li:hover {
     color: black;
     border-radius: 16px;
 }
+
+#signup a {
+    padding-left: 20px;
+    color: blue;
+    text-decoration: none;
+}
+
 
 .button {
     background-color: green;
@@ -193,10 +222,12 @@ div ul li:hover {
     width: 200px;
 }
 
-# head_table {
-    text-align: right
+link {
+    display: inline-block;
+    font-size: 16px;
+    padding: 20px 8px 8px 8px;
 }
-
-
-
+.link a {
+    text-decoration: none;
+}
 

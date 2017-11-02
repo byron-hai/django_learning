@@ -19,7 +19,12 @@ def blog(request):
 
 
 def home(request):
-    return render(request, "home.html",)
+    if request.user.is_authenticated():
+        log_tag = 'logout'
+    else:
+        log_tag = 'login'
+         
+    return render(request, 'home.html', {'log_tag': log_tag},)
 
 
 def learn(request):
@@ -30,9 +35,9 @@ def life_eden(request):
     return render(request, "lifeeden.html",)
 
 
-def blogy(request):
-    posts = BlogPost.objects.all()[:4]
-    return render(request, "blog.html", {'post': posts, 'form': BlogPostForm()})
+def get_posts(requests):
+    posts = Post.objects.filter(published=True)
+    return render(request, 'lifeeden', {'posts': posts})
 
 
 def create_blog(request):
@@ -62,3 +67,4 @@ def signup(request):
         form = UserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
+

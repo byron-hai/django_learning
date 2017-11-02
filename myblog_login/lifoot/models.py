@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.core.urlresolvers import reverse
 
 from django.db import models
 from django import forms
@@ -30,13 +30,13 @@ class Post(models.Model):
     image = models.ImageField(upload_to='media')
 
     class Meta:
-        ordering = ('-created')
+        ordering = ('-created',)
 
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog.views.post', args=[self.slug])
+        return reverse('blog.views.post', kwargs={'slug': self.slug})
 
 
 class BlogPostForm(forms.ModelForm):

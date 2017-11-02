@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign up</title>
+    <title>login</title>
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
@@ -13,9 +13,8 @@
 <body>
     <div id="signup_body">
     <div id="signup">
-       <p>Sign up</p>
-       <form method="post">
-            {% csrf_token %}
+        <p>Login</p>
+        <form method="post">{% csrf_token %}
             {% for field in form %}
             <p>
                 {{ field.label_tag }}<br>{{ field }}
@@ -27,9 +26,9 @@
                     <p style="color: red">{{ error }}</p>
                 {% endfor %}
             </p>
-        {% endfor %}
-        <button type="submit" id="button">Sign up</button>
-        <a href="{% url 'login' %}">login</a>
+            {% endfor %}
+        <button type="submit" id="button">login</button>
+        <a href="{% url 'signup' %}">Without an account?</a>
         <input type="hidden" name="next" value="{{ next }}"/>
        </form>
     </div>
