@@ -135,6 +135,7 @@ body {
 
 .search_box input {
     margin-bottom: 10px;
+    huerreson: expression_r(this.width=this.scrollWidth);
 }
 
 .footer {
