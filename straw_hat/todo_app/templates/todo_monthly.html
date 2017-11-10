@@ -1,0 +1,53 @@
+{% extends "todo_base.html" %}
+{% load staticfiles %}
+
+{% block todo %}
+
+<div class="row">
+        <div class="todo_column_left">
+            <div>
+                <h4> Plans for this Month </h4>
+                <form action="" method="post">{% csrf_token %}
+                    {% for field in month_form %}
+                        <p>
+                            {{ field.label_tag }} {{ field }}
+                            {% if field.help_text %}
+                                <small style="display: none">{{ field.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    <input type="submit" name="plan_this_month" value="Add to time-table"/>
+                </form>
+            </div>
+
+            <div class="table_box">
+                <table class="table">
+                    <caption>Time-table for: {{ current_month }}</caption>
+                    <tr>
+                        <th>Task Contents</th>
+                        <th>From-To</th>
+                        <th>Importance</th>
+                        <th>Status</th>
+                        <th>Finished(%)</th>
+                    </tr>
+                    {% for task in tasks_this_month %}
+                    <tr>
+                        <td>{{ task.task }}</td>
+                        <td>{{ task.start_date }} - {{ task.end_date }}</td>
+                        <td>{{ task.importance }}</td>
+                        <td>{{ task.status }}</td>
+                        <td>{{ task.finished }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="todo_column_right">
+            <h3>Here's a diagram for Month progress</h3>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %} life clock{% endblock %}
+
+{% block body_main %}
+
+<div class="main_body">
+
+    <div class="sub_topnav">
+        <a href="{% url 'todo_today' %}">Today</a>
+        <a href="{% url 'todo_monthly' %}"> This-Month</a>
+        <a href="{% url 'todo_yearly' %}">Long-Term</a>
+        <a href="{% url 'home' %}">Home</a>
+    </div>
+    <div class="hr">
+        <hr size="5">
+    </div>
+
+    {% block todo %}{% endblock %}
+</div>
+{% endblock %}

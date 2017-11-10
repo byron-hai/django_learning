@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>straw hat {% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/todo_styles.css' %}" />
+    <script type="text/javascript" src="{% static 'js/animate.js' %}"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="{% static 'images/logo.PNG' %}" alt="logo" height="60"/>
+        <p style="display: inline"> -- live by our ways, but not others (One phrase per day)--</p>
+        {% if log_tag == 'login' %}
+            <a href="{% url 'login' %}">login</a>
+        {% elif log_tag == 'logout' %}
+            <a href="#">logout</a>
+        {% endif %}
+    </div>
+
+    <div>
+        {% block topnav %}{% endblock %}
+    </div>
+    <div>
+        {% block body_main %}{% endblock %}
+    </div>
+
+    <div>
+        {% block footer %}{% endblock %}
+    </div>
+
+</body>
+</html>

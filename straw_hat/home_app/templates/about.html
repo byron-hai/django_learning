@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+    <title>create-blog</title>
+</head>
+<body>
+
+<div class="main_body">
+    <div class="header">
+        <img src="{% static 'images/logo.PNG' %}" alt="logo" height="60"/>
+        <p style="display: inline"> -- live by our ways, but not others --</p>
+        {% if log_tag == 'login' %}
+            <a href="{% url 'login' %}">login</a>
+        {% elif log_tag == 'logout' %}
+            <a href="{% url 'home' %}">logout</a>
+        {% endif %}
+    </div>
+
+    <hr>
+    <div>
+        <h3>Introduction</h3>
+        <h3>Contributors</h3>
+        <h3>Plans in Future</h3>
+        <h3>Contact</h3>
+    </div>
+</div>
+
+</body>
+</html>

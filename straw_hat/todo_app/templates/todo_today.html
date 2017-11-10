@@ -1,0 +1,53 @@
+{% extends "todo_base.html" %}
+{% load staticfiles %}
+
+{% block todo %}
+
+<div class="row">
+        <div class="todo_column_left">
+            <div>
+                <h4> Plans for today </h4>
+                <form action="" method="post">{% csrf_token %}
+                    {% for field in day_form %}
+                        <p>
+                            {{ field.label_tag }} {{ field }}
+                            {% if field.help_text %}
+                                <small style="display: none">{{ field.help_text }}</small>
+                            {% endif %}
+                        </p>
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    <input type="submit" name="plan_today" value="Add to time-table"/>
+                </form>
+            </div>
+
+            <div class="table_box">
+                <table class="table">
+                    <caption>Time-table for: {{ current_date }}</caption>
+                    <tr>
+                        <th>Time</th>
+                        <th>Task Contents</th>
+                        <th>Importance</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for task in tasks_today %}
+                    <tr>
+                        <td>{{ task.time }}</td>
+                        <td>{{ task.task }}</td>
+                        <td>{{ task.importance }}</td>
+                        <td>{{ task.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <hr size="5" width="100%">
+        </div>
+
+        <div class="todo_column_right">
+            <h3>Here's a diagram for day progress</h3>
+        </div>
+
+    </div>
+{% endblock %}

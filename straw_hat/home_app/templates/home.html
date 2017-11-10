@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+
+{% block topnav %}
+    <div class="topnav">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="#">learning</a>
+        <a href="#">lifeeden</a>
+        <a href="#">blog</a>
+        <a href="{% url 'todo_today' %}">lifeclock</a>
+    </div>
+{% endblock %}
+
+{% block body_main %}
+
+<div class="main_body">
+    <div class="row">
+        <div class="body_left">
+            <h2> Sharing is life</h2>
+            <p>
+                Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div class="body_right">
+            {% load static %}
+            <img src="{% static 'images/fly.jpg' %}" alt="my image" width="400"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="body_left">
+            <h2> Viewing every corner</h2>
+            <p>
+                Bula bula.....(Here's gonna be another lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div class="body_right">
+            {% load static %}
+            <img src="{% static 'images/time_steps.jpg' %}" alt="my image" width="400"/>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block footer %}
+    <footer class="footer">
+        <ul class="bottom_nav">
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
+        <br>
+        Copyright? from 2017 to my disappear straw hat Tec.com
+    </footer>
+{% endblock %}
