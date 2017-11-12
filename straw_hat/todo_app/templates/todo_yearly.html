@@ -26,6 +26,7 @@
                 <table class="table">
                     <caption>Long-term Scheduler</caption>
                     <tr>
+                        <th>Task-ID</th>
                         <th>Task Contents</th>
                         <th>From-To</th>
                         <th>Importance</th>
@@ -34,6 +35,7 @@
                     </tr>
                     {% for task in tasks_year %}
                     <tr>
+                        <td>{{ task.id }}</th>
                         <td>{{ task.task }}</td>
                         <td>{{ task.start_date }} - {{ task.end_date }}</td>
                         <td>{{ task.importance }}</td>
@@ -42,8 +44,41 @@
                     </tr>
                     {% endfor %}
                 </table>
+
+                <div class="change_form">
+                    <form action="" method="get">{% csrf_token %}
+                        <h4>Update-Tasks</h4>
+                        <select name="Choose_Task" >
+                            <option value="">Task-ID<option>
+                            {% for task_id in task_ids %}
+                                <option value="">{{ task_id }}</option>
+                            {% endfor  %}  
+                        </select>
+                        <input type="text" value="start-date" name="start_date"/>
+                        <input type="text" value="end-date" name="end_date"/><br>
+                        <select name="Importance">
+                            <option value="general">General</option>
+                            <option value="low">Low</option>
+                            <option value="middle">Middle</option>
+                            <option value="high">High</option>
+                        </select>
+                        <select name="Status">
+                            <option value="not_started">Not-Started</option>
+                            <option value="on_going">On-Going</option>
+                            <option value="delayed">Delayed</option>
+                            <option value="finished">Finished</option>
+                            <option value="canceled">Canceled</option>
+                        </select><br>
+                        <div class="confirm">
+                            <input type="reset" name="day_change" value="Reset"/>
+                            <input type="submit" name="year_change" value="Update Changes"/>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-            <hr size="5" width="100%">
+                <hr size="5" width="100%">
+            </div>
         </div>
 
         <div class="todo_column_right">

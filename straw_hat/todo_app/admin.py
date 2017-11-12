@@ -5,4 +5,5 @@ from .models import *
 
 
 admin.site.register(TodoThisYear)
+admin.site.register(TodoThisMonth)
 admin.site.register(TodoThisDay)

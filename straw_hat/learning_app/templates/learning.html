@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}learning{% endblock %}
+
+{% block body_main %}
+
+    <div class="sidenav">
+        <h4>life-work balance</h4>
+            <a href="#">Growing-up</a>
+            <a href="#">Communication</a>
+            <a href="#">Presentation</a>
+        <h4> skills</h4>
+            <a href="#">Python</a>
+            <a href="#">Django</a>
+            <a href="#">Shell-Script</a>
+        <h4>English-Corner</h4>
+            <a href="#">Daily</a>
+            <a href="#">Business</a>
+            <a href="#">Travel</a>
+    </div>
+
+   <div class="column_right">
+       <a href="{% url 'create' %}"> + Create </a>
+
+       <div class="search_box">
+           <form action="/" method="post">{% csrf_token %}
+               <input name="search" type="text" value="Search..." />
+           </form>
+           <input type="submit" value="Submit"/>
+       </div>
+       <hr>
+
+       <div>
+           <p>Most Popular</p>
+           {% block most_popular %}{% endblock %}
+       </div>
+       <hr>
+
+       <div>
+           <p> Recent posts </p>
+           <h4> Sharing is life</h4>
+           <h5> Author: Mr. NightGost( handwriting style)</h5>
+           <img src="{% static 'images/fly.jpg' %}" alt="my image" />
+           <p> bulabulaadvfafa....fdavdvdbf<br>fadafdvaa,.....bulalala</p>
+       </div>
+       <hr>
+
+    </div>
+
+    <div class="column_main">
+        <div>
+            <h2> Sharing is life</h2>
+            <p>
+                Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div>
+            {% load static %}
+            <img src="{% static 'images/fly.jpg' %}" alt="my image" />
+        </div>
+    </div>
+
+
+
+{% endblock %}

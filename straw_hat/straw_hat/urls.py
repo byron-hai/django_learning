@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home_app.urls')),
     url(r'^todo/', include('todo_app.urls')),
+    url(r'^', include('learning_app.urls')),
 ]
