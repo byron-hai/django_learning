@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
+    'filebrowser',
     'todo_app',
     'home_app',
     'learning_app',
@@ -123,8 +125,67 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+# STATIC_ROOT = "x.com/static"
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "todo_app/static"),
+    os.path.join(BASE_DIR, "static"),
     ]
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static_cdn")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"media_cdn")
+TINYMCE_JS_ROOT = os.path.join(BASE_DIR, "tinymce/meida/tiny_mce")
+
+TINYMCE_DEFAULT_CONFIG = {
+    'mode': "textarea",
+    'theme': "advanced",
+    'plugins': "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,"
+               "insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,"
+               "noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist,autosave",
+
+    'theme_advanced_buttons1': "newdocument,|,formatselect,|,fontselect,|,fontsizeselect,|,bold,italic,underline,"
+                               "strikethrough,|,sub,sup,|, forecolor,backcolor,|,link,unlink,anchor",
+
+    'theme_advanced_buttons2': "save,|,cut,copy,paste,pastetext,|,search,replace,|,bullist,numlist,|,"
+                               "justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,"
+                               "blockquote,|,image,media,|,insertdate,inserttime,"
+                               "",
+
+    'theme_advanced_buttons3': "tablecontrols,|,hr,removeformat,visualaid,|,charmap,emotions,iespell,"
+                               "advhr,|,print,|,undo,redo,|,preview",
+
+    'theme_advanced_toolbar_location': "top",
+    'theme_advanced_toolbar_align': "left",
+    'theme_advanced_statusbar_location': "bottom",
+    'theme_advanced_resizing': True,
+
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'width': 800,
+    'height': 600,
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
+
+"""
+TINYMCE_DEFAULT_CONFIG = {
+        'height': 360,
+        'width': 1120,
+        'cleanup_on_startup': True,
+        'custom_undo_redo_levels': 20,
+        'selector': 'textarea',
+        'theme': 'advanced',
+        'plugins': 'textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking contextmenu directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print  hr anchor pagebreak',
+        'toolbar1': 'save fullscreen bold italic underline,fontselect,fontsizeselect  | forecolor backcolor | alignleft aligncenter alignright alignjustify'
+        '| bullist numlist | outdent indent | table | link image media | codesample | preview code |',
+        'contextmenu': 'formats | link image',
+
+        'menubar': True,
+        'statusbar': True,
+
+}
+
+"""
+
+

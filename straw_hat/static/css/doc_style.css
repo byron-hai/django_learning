@@ -1,0 +1,26 @@
+.doc_box {
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.doc_title {
+    font-size: 32px;
+}
+
+.doc_subtitle p {
+    color: lightblue;
+    font-size: 14px;
+    display: inline;
+}
+.doc_content {
+    padding: 10px;
+}
+
+.doc_content img {
+    width: 60%;
+    height: auto;
+    margin: 20px;
+    border-radius: 12px;
+}
+

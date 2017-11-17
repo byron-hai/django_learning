@@ -50,7 +50,6 @@
                     <form action="" method="get">{% csrf_token %}
                         <h4>Update-Tasks</h4>
                         <select name="Choose_Task" >
-                            <option value="">Task-ID<option>
                             {% for task_id in task_ids %}
                                 <option value="">{{ task_id }}</option>
                             {% endfor  %}  

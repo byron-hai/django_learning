@@ -1,43 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
-    <title>create-blog</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block title %} new document {% endblock %}
+{% block body_main %}
 
 <div class="main_body">
-    <div class="header">
-        <img src="{% static 'images/logo.PNG' %}" alt="logo" height="60"/>
-        <p style="display: inline"> -- live by our ways, but not others --</p>
-        {% if log_tag == 'login' %}
-            <a href="{% url 'login' %}">login</a>
-        {% elif log_tag == 'logout' %}
-            <a href="{% url 'home' %}">logout</a>
-        {% endif %}
-    </div>
-
-    <hr>
-
-    <form action="" method="post">{% csrf_token %}
-        {% for field in form %}
-        <p>
-            {{ field.label_tag }}<br>{{ field }}
-            {% if field.help_text %}
-                <small style="display: none">{{ field.help_text }}</small>
-            {% endif %}
-
-            {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-            {% endfor %}
-        </p>
-       {% endfor %}
-
-       <input type="submit" value="Submit"/>
+<hr>
+<div class="column" id="content">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            {{ form.as_p }}
+        </div>
+        <input id="submit" type="submit" name="new_doc" value="Submit"/>
     </form>
 </div>
-
-</body>
-</html>
+</div>
+{% endblock %}

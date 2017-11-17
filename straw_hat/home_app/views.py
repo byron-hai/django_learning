@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 
 def index(request):
-
     text = "HelloWorld"
     return render(request, 'index.html', {'text': text})
 

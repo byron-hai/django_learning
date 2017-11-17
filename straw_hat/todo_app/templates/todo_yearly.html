@@ -3,9 +3,9 @@
 
 {% block todo %}
 <div class="row">
-        <div class="todo_column_left">
-            <div>
-                <h4> Plans for this long-team </h4>
+    <div class="todo_column_left">
+        <div>
+            <h4> Plans for long-team </h4>
                 <form action="" method="post">{% csrf_token %}
                     {% for field in year_form %}
                         <p>
@@ -49,7 +49,6 @@
                     <form action="" method="get">{% csrf_token %}
                         <h4>Update-Tasks</h4>
                         <select name="Choose_Task" >
-                            <option value="">Task-ID<option>
                             {% for task_id in task_ids %}
                                 <option value="">{{ task_id }}</option>
                             {% endfor  %}  
