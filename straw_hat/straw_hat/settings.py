@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'todo_app',
     'home_app',
     'learning_app',
+    'moment_app',
 ]
 
 MIDDLEWARE = [
@@ -144,16 +145,13 @@ TINYMCE_DEFAULT_CONFIG = {
                "insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,"
                "noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist,autosave",
 
-    'theme_advanced_buttons1': "newdocument,|,formatselect,|,fontselect,|,fontsizeselect,|,bold,italic,underline,"
-                               "strikethrough,|,sub,sup,|, forecolor,backcolor,|,link,unlink,anchor",
+    'theme_advanced_buttons1': "formatselect,|,fontselect,|,fontsizeselect,|,bold,italic,underline,|,strikethrough,|,"
+                               "sub,sup,charmap,|, forecolor,backcolor,|,bullist,numlist,|,justifyleft,justifycenter,"
+                               "justifyright,justifyfull,|,outdent,indent",
 
-    'theme_advanced_buttons2': "save,|,cut,copy,paste,pastetext,|,search,replace,|,bullist,numlist,|,"
-                               "justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,"
-                               "blockquote,|,image,media,|,insertdate,inserttime,"
-                               "",
-
-    'theme_advanced_buttons3': "tablecontrols,|,hr,removeformat,visualaid,|,charmap,emotions,iespell,"
-                               "advhr,|,print,|,undo,redo,|,preview",
+    'theme_advanced_buttons2': "copy,paste,pastetext,|,search,replace,|,tablecontrols,|,blockquote,|,image,media,|,"
+                               "insertdate,inserttime,|,link,unlink,|,emotions,iespell,advhr,|,anchor,undo,redo,|,"
+                               "preview",
 
     'theme_advanced_toolbar_location': "top",
     'theme_advanced_toolbar_align': "left",

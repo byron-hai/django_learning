@@ -1,20 +1,21 @@
 .todo_main {
     position: relative;
-    margin: 60px 8% 0 8%;
+    margin: 60px 4% 0 4%;
 }
 
 .todo_column_left {
     float: left;
     width: 60%;
     text-align: left;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
 }
 
 .todo_column_right {
     float: left;
     width: 40%;
+    height: 100%;
     text-align: center;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
 }
 
 .sub_topnav {
@@ -39,6 +40,22 @@
     color: #4d674d;
 }
 
+.plan_box {
+    padding: 10px;
+    position: relative;
+}
+
+.plan_box h4 {
+    color: #607818;
+}
+
+.plan_box table input{
+    width: 140px;
+    margin: 10px 0px;
+}
+
+
+
 .table_box {
     padding: 10px 5px;
     margin-top: 30px;
@@ -52,7 +69,7 @@
 
 .table caption {
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -69,16 +86,21 @@
     border: 1px solid #fff;
 }
 
+
 .table td {
     text-align: left;
 }
 
 .change_form {
-    padding: 10px 5px;
+    padding: 8px 4px;
 }
 
-.change_form select {
-    margin: 4px
+.change_form h4 {
+    color: #607818;
+}
+
+.change_form input, select {
+    margin: 4px 8px;
 }
 
 .confirm {
@@ -89,4 +111,39 @@
     margin-top: 0px;
     width: 60%;
     text-align: left;
+}
+
+.chart_box {
+    padding: 10px;
+    text-align: center;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+}
+
+.chart_box .title {
+    color: #566b57;
+}
+.chart_box canvas {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.val_high {
+    background-color: #ffc05b;
+}
+
+.val_middle {
+    background-color: #f4f39a;
+}
+
+.val_low {
+    background-color: #d4f4d7;
+}
+
+.val_general {
+    background-color: #e0efda;
+}
+
+.val_finished {
+    background-color: #f2f4f4;
 }

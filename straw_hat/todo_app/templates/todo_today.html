@@ -3,82 +3,122 @@
 
 {% block todo %}
 
-<div class="row">
-        <div class="todo_column_left">
-            <div>
-                <h4> Plans for today </h4>
-                <form action="" method="post">{% csrf_token %}
-                    {% for field in day_form %}
-                        <p>
-                            {{ field.label_tag }} {{ field }}
-                            {% if field.help_text %}
-                                <small style="display: none">{{ field.help_text }}</small>
-                            {% endif %}
-                        </p>
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    {% endfor %}
-                    <input type="submit" name="plan_today" value="Add to time-table"/>
-                </form>
-            </div>
-
-            <div class="table_box">
-                <table class="table">
-                    <caption>Time-table for: {{ current_date }}</caption>
-                    <tr>
-                        <th>Task-ID</th>
-                        <th>Time</th>
-                        <th>Task Contents</th>
-                        <th>Importance</th>
-                        <th>Status</th>
-                    </tr>
-                    {% for task in tasks_today %}
-                    <tr>
-                        <td>{{ task.id }} </td>
-                        <td>{{ task.task_time }}</td>
-                        <td>{{ task.task }}</td>
-                        <td>{{ task.importance }}</td>
-                        <td>{{ task.status }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-
-                <div class="change_form">
-                    <form action="" method="get">{% csrf_token %}
-                        <h4>Update-Tasks</h4>
-                        <select name="Choose_Task" >
-                            {% for task_id in task_ids %}
-                                <option value="">{{ task_id }}</option>
-                            {% endfor  %}  
-                        </select>
-                        <input type="text" value="Time like 12:20" name="Time"/>
-                        <select name="Importance">
-                            <option value="general">General</option>
-                            <option value="low">Low</option>
-                            <option value="middle">Middle</option>
-                            <option value="high">High</option>
-                        </select>
-                        <select name="Status">
-                            <option value="not_started">Not-Started</option>
-                            <option value="on_going">On-Going</option>
-                            <option value="finished">Finished</option>
-                            <option value="canceled">Canceled</option>
-                        </select><br>
-                        <div class="confirm">
-                            <input type="reset" name="day_change" value="Reset"/>
-                            <input type="submit" name="day_change" value="Update Changes"/>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-            <hr size="5" width="100%">
-        </div>
-
-        <div class="todo_column_right">
-            <h3>Here's a diagram for day progress</h3>
-        </div>
-
+<div class="todo_column_left">
+    <div class="plan_box">
+        <h4> Plan for <span style="font-size: 20px; color: #c1dd42;">Today</span> </h4>
+        <form action="" method="post">{% csrf_token %}
+            <table>
+                <colgroup>
+                    <col width="16%">
+                    <col width="60%">
+                </colgroup>
+                <tr>
+                    <td>{{ day_form.task.label_tag }}</td>
+                    <td>{{ day_form.task }}</td>
+                </tr>
+                <tr>
+                    <td><label for="task_time">Time:</label></td>
+                    <td>
+                        <input type="time" id="task_time" name="task_time" value="{{ day_form.task_time|time:'H:i' }}"
+                               required pattern="[0-9]{2}:[0-9]{2}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ day_form.importance.label_tag }}</td>
+                    <td>{{ day_form.importance }}</td>
+                </tr>
+            </table>
+            <input type="submit" name="plan_today" value="Add to time-table"/>
+        </form>
     </div>
+
+
+    <div class="table_box">
+        <table class="table">
+            <caption>Time-table for: {{ current_date }}</caption>
+            <colgroup>
+                <col width="12%">
+                <col width="15%">
+                <col width="40%">
+                <col width="15%">
+                <col width="15%">
+            </colgroup>
+            <tr>
+                <th>Task-ID</th>
+                <th>Time</th>
+                <th>Task Contents</th>
+                <th>Importance</th>
+                <th>Status</th>
+            </tr>
+            {% for task in tasks_today %}
+                {% if task.importance == 'High' and task.status != 'Finished' %}
+                    <tr class="val_high">
+                {% elif task.importance == 'Middle' and task.status != 'Finished' %}
+                    <tr class="val_middle">
+                {% elif task.importance == 'Low' and task.status != 'Finished' %}
+                    <tr class="val_low">
+                {% elif task.status == 'Finished' %}
+                    <tr class="val_finished">
+                {% else %}
+                    <tr class="val_general">
+                {% endif %}
+                    <td>{{ task.id }} </td>
+                    <td>{{ task.task_time }}</td>
+                    <td>{{ task.task }}</td>
+                    <td>{{ task.importance }}</td>
+                    <td>{{ task.status }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="change_form">
+        <form action="" name="taskModify" method="post">{% csrf_token %}
+            <h4>Update-Tasks</h4>
+            <select name="taskId" id="taskId">
+                <option selected="selected" disabled>Task-ID</option>
+                {% for task_id in task_ids %}
+                    <option value='{{ task_id }}'>{{ task_id }}</option>
+                {% endfor  %}
+            </select>
+
+            <input type="time" value="" name="appt_time"/>
+
+            <select name="importance">
+                <option selected="selected" disabled>Importance</option>
+                {% for import_val in importance_all %}
+                    <option value='{{ import_val }}'>{{ import_val }}</option>
+                {% endfor %}
+
+            </select>
+
+            <select name="status">
+                <option selected="selected" disabled>Status</option>
+                {% for status in status_all %}
+                    <option value='{{ status }}'>{{ status }}</option>
+                {% endfor %}
+            </select><br>
+
+            <div class="confirm">
+                <input type="reset" name="reset_opts" value="Reset"/>
+                <input type="submit" name="day_plan_update" value="Update Changes"/>
+            </div>
+        </form>
+    </div>
+
+    <hr size="5" width="100%">
+</div>
+
+<div class="todo_column_right">
+    <div class="chart_box">
+        <div class="title">
+            <h3>Progress of lastday</h3>
+        </div>
+        <div class="chart">
+
+        </div>
+    </div>
+    <h3>Progress of today</h3>
+</div>
+
 {% endblock %}

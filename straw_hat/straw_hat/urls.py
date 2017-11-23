@@ -26,11 +26,12 @@ urlpatterns = [
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^', include('home_app.urls')),
     url(r'^todo/', include('todo_app.urls')),
-    url(r'^', include('learning_app.urls')),
+    url(r'^learning/', include('learning_app.urls')),
+    url(r'^moment/', include('moment_app.urls')),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL , document_root = settings.STATIC_ROOT )
-    urlpatterns += static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT )
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, )
 

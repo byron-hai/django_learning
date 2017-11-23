@@ -4,6 +4,6 @@ from .views import *
 
 
 urlpatterns = [
-    url(r'^learning/$', learning, name='learning'),
-    url(r'^learning/new/$', new_document, name="new"),
+    url(r'^$', learning, name='learning'),
+    url(r'^new/$', new_document, name="new"),
 ]

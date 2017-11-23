@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from .models import Category, SubCategory, DocPost, DocPostForm
-from datetime import datetime
+from django.utils import timezone
 
 
 def learning(request):
@@ -19,8 +19,7 @@ def new_document(request):
         form = DocPostForm(request.POST)
         if form.is_valid():
             doc = form.save(commit=False)
-            doc.pub_date = datetime.now()
-            doc.update_date = datetime.now()
+            doc.pub_date = timezone.now()
             doc.save()
             return redirect('learning')
     else:

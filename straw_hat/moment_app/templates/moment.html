@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}learning{% endblock %}
+{% load staticfiles %}
+{% block title %}life eden{% endblock %}
 
 {% block topnav %}
     <div class="topnav">
@@ -15,45 +15,33 @@
 
     <div class="sidenav">
         {% for item in category %}
-            <h4>{{ item }}</h4>
-            {% for child in item.children.all %}
-                <a href="#">{{ child }}</a>
-            {% endfor %}
+            <a href="#">{{ item }}</a>
         {% endfor %}
     </div>
 
     <div class="column_right">
-       <a href="{% url 'new' %}"> + New a Doc </a>
-
-       <div class="search_box">
+        <a href="{% url 'new' %}"> + Add New</a>
+        <div class="search_box">
            <form action="/" method="post">{% csrf_token %}
                <input name="search" type="text" value="Search..." />
            </form>
            <input type="submit" value="Submit"/>
        </div>
+
        <hr>
 
-       <div>
-           <p>Most Popular</p>
-           {% block most_popular %}
+       <p>Most Popular</p>
 
-           {% endblock %}
-       </div>
-       <hr>
+       {% block most_popular %}{% endblock %}
 
-       <div>
-           <p> Recent posts </p>
-           <h4> Sharing is life</h4>
-           <h5> Author: Mr. NightGost( handwriting style)</h5>
-           <img src="{% static 'images/fly.jpg' %}" alt="my image" />
-           <p> bulabulaadvfafa....fdavdvdbf<br>fadafdvaa,.....bulalala</p>
-       </div>
-       <hr>
-
+       <p> Recent post </p>
+        <div>
+            {{ latest }}
+        </div>
     </div>
 
     <div class="column_main">
-        {% for doc in docs %}
+         {% for doc in docs %}
             <div class="doc_box">
                 <div class="doc_subtitle">
                     <p>{{ doc.doc_type }} | </p>
@@ -68,6 +56,18 @@
             </div>
             <hr>
         {% endfor %}
+
+        <div>
+            <h2> Sharing is life</h2>
+            <p>
+                Bula bula.....(Here's gonna be lots of words, so skip them to make our story short)
+            </p>
+        </div>
+
+        <div >
+            {% load static %}
+            <img src="{% static 'images/time_steps.jpg' %}" alt="my image" width="400"/>
+        </div>
     </div>
 
 {% endblock %}

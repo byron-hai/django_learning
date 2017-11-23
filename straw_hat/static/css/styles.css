@@ -117,6 +117,7 @@ body {
 .column_right {
     float: right;
     width: 24%;
+    height: auto;
     text-align: left;
     padding: 20px;
     font-size: 16px;
