@@ -1,0 +1,273 @@
+/* Layout */
+
+body {
+    overflow: auto;
+    background-color: #f2f4f7;
+    font-family: Arial, Times New Roman;
+    margin: 0 5%;
+}
+
+.main {
+    background-color: White;
+    padding: 20px 0;
+    z-index: 0;
+}
+
+.header {
+    background-color: Black;
+    color: White;
+    width: 100%;
+}
+
+.header .theme {
+    display: inline-block;
+    padding: 10px;
+    width: 20%;
+}
+
+.header .theme h2 {
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.header .theme img {
+    height: 50px;
+    display: index-block;
+    margin: 0px 20px;
+}
+
+.header .topNav {
+    display: inline-block;
+    text-align: right;
+    width: 70%;
+    padding: 10px;
+    //border: solid 1px Blue;
+}
+
+.header .topNav a {
+    padding: 10px;
+    margin-right; 60px;
+    color: White;
+    text-decoration: none;
+}
+
+.header .topNav a:hover {
+    text-decoration: underline;
+}
+
+.header .topNav p {
+    display: inline;
+}
+
+.page_mask {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f4f7;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+.login {
+    display: none;
+    position: fixed;
+    width: 24%;
+    left: 36%;
+    top: 20%;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 100;
+    text-align: center;
+    border: solid 1px #dee9f7;
+    background-color: White;
+    border-radius: 40px;
+}
+
+.login img {
+    height: 60px;
+}
+
+.login p {
+    color: #b6b7b3;
+}
+
+.login input {
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    width: 240px;
+    height: 26px;
+    border-radius: 18px;
+    border: solid 1px #ccc;
+}
+
+.login input:focus{
+    -webkit-box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow: 0 0 5px #ccc;
+    box-shadow: 0 0 5px #ccc;
+    border-color: #fff;
+    border: none;
+}
+
+.login button {
+    width: 160px;
+    padding: 6px 20px;
+    color: White;
+    background-color: #26b3ff;
+    border-radius: 18px;
+    border: solid 1px #26b3ff;
+    margin-bottom: 30px;
+}
+
+.login #quit {
+    width: 40px;
+    height: 40px;
+    vertical-align: center;
+    border-radius: 50%;
+    padding: 1px;
+    color: #ccc;
+    font-size: 20px;
+    background-color: White;
+    border: solid 1px #ccc;
+}
+
+.login .change {
+    color: Blue;
+}
+
+.login .change:hover {
+    text-decoration: underline;
+}
+
+.login #signup_box {
+    display: none;
+}
+
+.shelf {
+    //border: solid 1px Blue;
+    padding: 20px;
+}
+
+.shelf h2 {
+    background-color: #dee6f2;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 30px
+}
+
+.shelf h3 {
+    margin-top: 0;
+    background-color: #2b6fdb;
+    color: White;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    border: solid 1px #c9d4e5;
+    border-radius: 16px 16px 0 0;
+}
+
+.release_info {
+
+    display: inline-block;
+    vertical-align: top;
+    width: 32%;
+    height: 300px;
+    padding-bottom: 10px;
+    border: solid 1px #dee9f7;
+    border-radius: 16px;
+    margin-right: 10px;
+}
+
+.release_info_box table {
+
+    margin: 30px 10px;
+    width: 96%;
+}
+
+.release_info table tr,td {
+    //border: solid 1px White;
+    padding: 6px;
+    font-size: 18px;
+}
+
+.release_info_box form {
+    display: inline-block;
+}
+
+.release_info_box select {
+    border: none;
+    width: 160px;
+    font-size:18px;
+    background-color: White;
+}
+
+.tc_projects {
+    display: inline-block;
+    vertical-align: top;
+    width: 66%;
+    height: 300px;
+    padding-bottom: 10px;
+    border: solid 1px #dee9f7;
+    border-radius: 16px;
+}
+
+.tc_info_box {
+    overflow: scroll;
+}
+
+.tc_info_box table {
+    width: 98%;
+    margin: 10px;
+}
+
+.tc_info_box table th {
+    padding: 6px 10px;
+    text-align: left;
+    background-color: #bdd7f9;
+}
+
+.tc_info_box table td {
+    background-color: #eaf3ff;
+}
+
+.tc_info_box table a {
+    color: Blue;
+    text-decoration: none;
+}
+
+.tc_info_box table a:hover {
+    text-decoration: underline;
+}
+
+.releases {
+    display: inline-block;
+    vertical-align: top;
+    border: solid 1px #dee9f7;
+    width: 32%;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 16px;
+}
+
+.releases .release {
+    text-align: left;
+    padding: 10px;
+}
+
+.releases .release a {
+    text-decoration: none;
+    padding: 4px;
+    margin: 10px; 20px;
+}
+.release button {
+    width: 32px;
+    height: 32px;
+    padding: 1px;
+    font-size: 16px;
+}
+
+.release #swReleaseAdd, #fwReleaseAdd, #appReleaseAdd {
+    display: none;
+    margin: 10px;
+    padding: 10px;
+}

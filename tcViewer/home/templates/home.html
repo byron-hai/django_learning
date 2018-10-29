@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block dashboard %}
+<div class="dashboard">
+    <div class="shelf">
+        <h2>Release test overview</h2>
+        <div class="overview">
+
+            <div class="release_info">
+                <h3>Release-test summary</h3>
+                <div class="release_info_box">
+                    <table>
+                        <colgroup>
+                            <col width="36%">
+                            <col width="60%">
+                        </colgroup>
+
+                        <tr>
+                            <td>Software Revision</td>
+                            <td>
+                                <form action='' method="post">{% csrf_token %}
+                                    <select name="sw_revision">
+                                        <option selected="selected" disabled>
+                                            {{sw_tc_summary.sw_revision.branch}}_{{sw_tc_summary.sw_revision.revision}}
+                                        </option>
+                                        {% for revision in sw_releases %}
+                                        <option value="{{ revision.revision }}">
+                                            {{revision.branch}}_{{revision.revision}}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Schedule</td>
+                            <td>
+                                {{sw_tc_summary.schedule_start|date:"m-d"}} - {{sw_tc_summary.schedule_end|date:"m-d"}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Current status</td>
+                            <td>{{ sw_tc_summary.status }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Progress</td>
+                            <td>
+                                <progress value="{{ sw_tc_summary.progress }}" max="100"></progress>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tc_projects">
+                <h3>Testing Items</h3>
+                <div class="tc_info_box">
+                    <table>
+                        <colgroup>
+                            <col width="22%">
+                            <col width="16%">
+                            <col width="14%">
+                            <col width="14%">
+                            <col width="9%">
+                            <col width="9%">
+                            <col width="9%">
+                            <col width="9%">
+                        </colgroup>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>SW Revision</th>
+                            <th>FW Revision</th>
+                            <th>Schedule</th>
+                            <th>Result</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Owner</th>
+                        </tr>
+                        {% for project in tc_projects %}
+                        <tr>
+                            <td> <a href="#">{{ project.name }}</a></td>
+                            <td>{{ project.sw_revision.branch }}_{{ project.sw_revision.revision }}</td>
+                            <td>{{ project.fw_version.fw_type }}_{{ project.fw_version.version }}</td>
+                            <td>{{project.schedule_start|date:"m-d"}} - {{project.schedule_end|date:"m-d"}}</td>
+                            <td>{{ project.result }}</td>
+                            <td>{{ project.status }}</td>
+                            <td>{{ project.progress }}</td>
+                            <td>{{ project.owner }}</td>
+                        </tr>
+                        {# {% url 'tc_view' revision='1.1.1' prj_name=project.slug %} #}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shelf">
+        <h2>Release dashboard</h2>
+        <div>
+            <div class="releases">
+                <h3>Software Release</h3>
+                <div class="release">
+                    {% for release in sw_releases %}
+                    <a href="#"> {{ release.branch }}_{{ release.revision }} </a>
+                    {% endfor %}
+
+                    <button type="button" onclick="addNew('swReleaseAdd');"> + </button>
+                    <div id="swReleaseAdd">
+                        <form action='' method="post">{% csrf_token %}
+                            <p>Add new demo</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="releases">
+                <h3>Firmware Release</h3>
+                <div class="release">
+                    {% for release in fw_releases %}
+                    <a href="#"> {{ release.fw_type }}_{{ release.version }} </a href="#">
+                    {% endfor %}
+
+                    <button type="button" onclick="addNew('fwReleaseAdd')"> + </button>
+                    <div id="fwReleaseAdd">
+                        <form action='' method="post">{% csrf_token %}
+                            <p>Add new demo</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="releases">
+                <h3>Application Release</h3>
+                <div class="release">
+                    {% for release in app_releases %}
+                    <a href="#">{{ release.version }}</a>
+                    {% endfor %}
+
+                    <button type="button" onclick="addNew('appReleaseAdd')"> + </button>
+                    <div id="appReleaseAdd">
+                        <form action='' method="post">{% csrf_token %}
+                            <p>Add new demo</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shelf">
+        <h2>Products</h2>
+        <div class="products">
+            <button type="button"> + </button>
+            <div class="product">
+                {% for product in products %}
+                <p>{{ product.opn }} {{ product.serial_number }} {{product.model}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="shelf">
+        <h2>Testing projects</h2>
+        <div class="tcProjects">
+            <button type="button"> + </button>
+            <div>
+                {% for item in tc_projects %}
+                <p>{{ item.name }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
