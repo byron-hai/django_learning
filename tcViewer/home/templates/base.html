@@ -16,8 +16,8 @@
         </div>
 
         <div class="topNav">
-            <a href="{% url 'dashboard' %}">Dashboard</a>
-            {% if Demo and user.is_authenticated %}
+            <a href="{% url 'home' %}">Dashboard</a>
+            {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}">Logout</a>
                 <p>{{user.username | capfirst}}</p>
             {% else %}

@@ -59,43 +59,51 @@
 
             <div class="tc_projects">
                 <h3>Testing Items</h3>
-                <div class="tc_info_box">
-                    <table>
-                        <colgroup>
-                            <col width="22%">
-                            <col width="16%">
-                            <col width="14%">
-                            <col width="14%">
-                            <col width="9%">
-                            <col width="9%">
-                            <col width="9%">
-                            <col width="9%">
-                        </colgroup>
-                        <tr>
-                            <th>Project Name</th>
-                            <th>SW Revision</th>
-                            <th>FW Revision</th>
-                            <th>Schedule</th>
-                            <th>Result</th>
-                            <th>Status</th>
-                            <th>Progress</th>
-                            <th>Owner</th>
-                        </tr>
-                        {% for project in tc_projects %}
-                        <tr>
-                            <td> <a href="#">{{ project.name }}</a></td>
-                            <td>{{ project.sw_revision.branch }}_{{ project.sw_revision.revision }}</td>
-                            <td>{{ project.fw_version.fw_type }}_{{ project.fw_version.version }}</td>
-                            <td>{{project.schedule_start|date:"m-d"}} - {{project.schedule_end|date:"m-d"}}</td>
-                            <td>{{ project.result }}</td>
-                            <td>{{ project.status }}</td>
-                            <td>{{ project.progress }}</td>
-                            <td>{{ project.owner }}</td>
-                        </tr>
-                        {# {% url 'tc_view' revision='1.1.1' prj_name=project.slug %} #}
-                        {% endfor %}
-                    </table>
-                </div>
+                {% if tc_projects %}
+                    <div class="tc_info_box">
+                        <table>
+                            <colgroup>
+                                <col width="22%">
+                                <col width="16%">
+                                <col width="14%">
+                                <col width="14%">
+                                <col width="9%">
+                                <col width="9%">
+                                <col width="9%">
+                                <col width="9%">
+                            </colgroup>
+                            <tr>
+                                <th>Project Name</th>
+                                <th>SW Revision</th>
+                                <th>FW Revision</th>
+                                <th>Schedule</th>
+                                <th>Result</th>
+                                <th>Status</th>
+                                <th>Progress</th>
+                                <th>Owner</th>
+                            </tr>
+                            {% for project in tc_projects %}
+                            <tr>
+                                <td> <a href="#">{{ project.name }}</a></td>
+                                <td>{{ project.sw_revision.branch }}_{{ project.sw_revision.revision }}</td>
+                                <td>{{ project.fw_version.fw_type }}_{{ project.fw_version.version }}</td>
+                                <td>{{project.schedule_start|date:"m-d"}} - {{project.schedule_end|date:"m-d"}}</td>
+                                <td>{{ project.result }}</td>
+                                <td>{{ project.status }}</td>
+                                <td>{{ project.progress }}</td>
+                                <td>{{ project.owner }}</td>
+                            </tr>
+                            {# {% url 'tc_view' revision='1.1.1' prj_name=project.slug %} #}
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <p>No Data Recorded for {{ cur_release }}</p>
+                    <button type="button" onclick="addNew('tcProjects')">+</button>
+                    <div id="tcProjects">
+                        <p>checkbox for all tc projects, include 'select all'</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
