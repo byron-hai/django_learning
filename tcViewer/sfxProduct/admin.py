@@ -4,10 +4,11 @@ from .models import *
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'serial_number', 'opn', 'model')
+    list_display = ('id', 'serial_number', 'opn', 'model', 'capacity')
 
 
 admin.site.register(Model)
 admin.site.register(OPN)
 admin.site.register(SN)
+admin.site.register(Capacity)
 admin.site.register(Product, ProductAdmin)

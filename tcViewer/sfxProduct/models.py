@@ -4,7 +4,7 @@ from django.db import models
 
 class Model(models.Model):
     model = models.CharField(max_length=20, unique=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.model
@@ -33,10 +33,21 @@ class SN(models.Model):
         verbose_name_plural = "Product Serial Numbers"
 
 
+class Capacity(models.Model):
+    capacity = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.capacity
+    
+    class Meta:
+        verbose_name_plural = "Capacities"
+        
+        
 class Product(models.Model):
-    model = models.ForeignKey(Model, on_delete=models.CASCADE)
-    serial_number = models.ForeignKey(SN, on_delete=models.CASCADE)
-    opn = models.ForeignKey(OPN, on_delete=models.CASCADE)
+    model = models.CharField(max_length=20, blank=True, null=True)
+    capacity = models.CharField(max_length=10, blank=True, null=True)
+    serial_number = models.CharField(max_length=40)
+    opn = models.CharField(max_length=40)
 
     def __str__(self):
         return "{} {}".format(self.serial_number, self.opn)

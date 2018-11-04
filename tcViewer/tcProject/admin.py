@@ -9,11 +9,13 @@ class GeneralTcNoteAdmin(admin.ModelAdmin):
 
 
 class RelTcSumAdmin(admin.ModelAdmin):
-    list_display = ('sw_revision', 'schedule_start', 'schedule_end', 'status', 'progress')
+    list_display = ('sw_revision', 'schedule_start', 'schedule_end', 'finish_date', 'status', 'progress')
 
 
+admin.site.register(ProjectCategory)
+admin.site.register(TcProject)
 admin.site.register(TcStatus)
 admin.site.register(SupportedKernels)
-admin.site.register(TcProject)
+admin.site.register(SupportedOSType)
 admin.site.register(GeneralTcNote, GeneralTcNoteAdmin)
 admin.site.register(ReleaseTcSummary, RelTcSumAdmin)

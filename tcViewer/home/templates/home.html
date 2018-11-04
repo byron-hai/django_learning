@@ -5,41 +5,35 @@
 {% block dashboard %}
 <div class="dashboard">
     <div class="shelf">
-        <h2>Release test overview</h2>
+        <h2>Overview</h2>
         <div class="overview">
 
             <div class="release_info">
                 <h3>Release-test summary</h3>
                 <div class="release_info_box">
+                    {% if sw_tc_summary %}
                     <table>
                         <colgroup>
-                            <col width="36%">
-                            <col width="60%">
+                            <col width="32%">
+                            <col width="46%">
+                            <col width="20%">
                         </colgroup>
-
                         <tr>
-                            <td>Software Revision</td>
-                            <td>
-                                <form action='' method="post">{% csrf_token %}
-                                    <select name="sw_revision">
-                                        <option selected="selected" disabled>
-                                            {{sw_tc_summary.sw_revision.branch}}_{{sw_tc_summary.sw_revision.revision}}
-                                        </option>
-                                        {% for revision in sw_releases %}
-                                        <option value="{{ revision.revision }}">
-                                            {{revision.branch}}_{{revision.revision}}
-                                        </option>
-                                        {% endfor %}
-                                    </select>
-                                </form>
-                            </td>
+                            <td>SW Revision</td>
+                            <td>{{sw_tc_summary.sw_revision.revision}}</td>
+                            <td><button type="button" onclick="addNew('release_info_config')" class="edit_btn">C</button></td>
                         </tr>
 
                         <tr>
+                            <td>Code Branch</td>
+                            <td>{{ sw_tc_summary.sw_revision.branch }}</td>
+                        </tr>
+                        <tr>
                             <td>Schedule</td>
                             <td>
-                                {{sw_tc_summary.schedule_start|date:"m-d"}} - {{sw_tc_summary.schedule_end|date:"m-d"}}
+                                {{sw_tc_summary.schedule_start|date:'m-d'}} - {{sw_tc_summary.schedule_end|date:'m-d'}}
                             </td>
+                            <td><button type="button" onclick="addNew('release_info_config')" class="edit_btn">C</button></td>
                         </tr>
 
                         <tr>
@@ -54,12 +48,31 @@
                             </td>
                         </tr>
                     </table>
+                    {% else %}
+                    <p>
+                        No data recorded
+                        <button type="button" onclick="addNew('release_info_config')" class="edit_btn">+</button>
+                    </p>
+                    {% endif %}
+                </div>
+
+                <div id="release_info_config">
+                    <form action="{% url 'sum_info' %}" method="post">{% csrf_token %}
+                        <select name="sw_revision">
+                            {% for revision in sw_releases %}
+                            <option value="{{ revision.revision }}">{{revision.revision}}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="date" value="{{sw_tc_summary.schedule_start|date:'m-d'}}" name="start_date"/> -
+                        <input type="date" value="{{sw_tc_summary.schedule_end|date:'m-d'}}" name="end_date"/>
+                        <button type="submit" name="sw_summary_conf">Go</button>
+                    </form>
                 </div>
             </div>
 
             <div class="tc_projects">
                 <h3>Testing Items</h3>
-                {% if tc_projects %}
+                {% if re_tc_projects %}
                     <div class="tc_info_box">
                         <table>
                             <colgroup>
@@ -82,7 +95,7 @@
                                 <th>Progress</th>
                                 <th>Owner</th>
                             </tr>
-                            {% for project in tc_projects %}
+                            {% for project in re_tc_projects %}
                             <tr>
                                 <td> <a href="#">{{ project.name }}</a></td>
                                 <td>{{ project.sw_revision.branch }}_{{ project.sw_revision.revision }}</td>
@@ -98,10 +111,24 @@
                         </table>
                     </div>
                 {% else %}
-                    <p>No Data Recorded for {{ cur_release }}</p>
-                    <button type="button" onclick="addNew('tcProjects')">+</button>
-                    <div id="tcProjects">
-                        <p>checkbox for all tc projects, include 'select all'</p>
+                    <div class="tc_info_box">
+                        <p>
+                            No Data Recorded. Add new test plans?
+                            <button type="button" onclick="addNew('tc_category')" class="edit_btn">+</button>
+                        </p>
+                        <div id="tc_category">
+                            <form action="" method="post">{% csrf_token %}
+                                <button type="submit">All</button>
+                                <button type="submit">Go</button>
+                                <button type="reset">Reset</button>
+                                {% for project in tc_projects %}
+                                <p>
+                                    <input type="checkbox" value="{{ project.name }}" name="tcProjects"/>
+                                    <label>{{project.name}}</label>
+                                </p>
+                                {% endfor %}
+                            </form>
+                        </div>
                     </div>
                 {% endif %}
             </div>
@@ -118,10 +145,28 @@
                     <a href="#"> {{ release.branch }}_{{ release.revision }} </a>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('swReleaseAdd');"> + </button>
+                    <button type="button" onclick="addNew('swReleaseAdd');" class="edit_btn"> + </button>
                     <div id="swReleaseAdd">
-                        <form action='' method="post">{% csrf_token %}
-                            <p>Add new demo</p>
+                        <form action="{% url 'release_add' rel_type='sw_release' %}" method="post">{% csrf_token %}
+                            <table>
+                                <colgroup>
+                                    <col width="30%">
+                                    <col width="60%">
+                                </colgroup>
+                                {% for field in sw_new %}
+                                    <tr>
+                                        {% if 'rel_date' in field.label_tag %}
+                                            <td><label>Release date</label></td>
+                                            <td><input type="date" value="{{ field | date:'Y-m-d'}}" name="rel_date" /></td>
+                                        {% else %}
+                                            <td>{{ field.label_tag }}</td>
+                                            <td>{{ field }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <button type="submit" name="sw_release_new" class="btn">Go</button>
+                            <button type="reset" class="btn">Reset</button>
                         </form>
                     </div>
                 </div>
@@ -131,13 +176,31 @@
                 <h3>Firmware Release</h3>
                 <div class="release">
                     {% for release in fw_releases %}
-                    <a href="#"> {{ release.fw_type }}_{{ release.version }} </a href="#">
+                    <a href="#"> {{ release.fw_type }}_{{ release.version }} </a>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('fwReleaseAdd')"> + </button>
+                    <button type="button" onclick="addNew('fwReleaseAdd')" class="edit_btn"> + </button>
                     <div id="fwReleaseAdd">
-                        <form action='' method="post">{% csrf_token %}
-                            <p>Add new demo</p>
+                        <form action="{% url 'release_add' rel_type='fw_release' %}" method="post">{% csrf_token %}
+                            <table>
+                                <colgroup>
+                                    <col width="30%">
+                                    <col width="60%">
+                                </colgroup>
+                                {% for field in fw_new %}
+                                    <tr>
+                                        {% if 'rel_date' in field.label_tag %}
+                                            <td><label>Release date</label></td>
+                                            <td><input type="date" value="{{ field | date:'Y-m-d'}}" name="rel_date" /></td>
+                                        {% else %}
+                                            <td>{{ field.label_tag }}</td>
+                                            <td>{{ field }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <button type="submit" name="fw_release_new" class="btn">Go</button>
+                            <button type="reset" class="btn">Reset</button>
                         </form>
                     </div>
                 </div>
@@ -150,10 +213,28 @@
                     <a href="#">{{ release.version }}</a>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('appReleaseAdd')"> + </button>
+                    <button type="button" onclick="addNew('appReleaseAdd')" class="edit_btn"> + </button>
                     <div id="appReleaseAdd">
-                        <form action='' method="post">{% csrf_token %}
-                            <p>Add new demo</p>
+                        <form action="{% url 'release_add' rel_type='app_release' %}" method="post">{% csrf_token %}
+                            <table>
+                                <colgroup>
+                                    <col width="30%">
+                                    <col width="60%">
+                                </colgroup>
+                                {% for field in app_new %}
+                                    <tr>
+                                        {% if 'rel_date' in field.label_tag %}
+                                            <td><label>Release date</label></td>
+                                            <td><input type="date" value="{{ field | date:'Y-m-d'}}" name="rel_date" /></td>
+                                        {% else %}
+                                            <td>{{ field.label_tag }}</td>
+                                            <td>{{ field }}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <button type="submit" name="app_release_new" class="btn">Go</button>
+                            <button type="reset" class="btn">Reset</button>
                         </form>
                     </div>
                 </div>
@@ -164,24 +245,60 @@
     <div class="shelf">
         <h2>Products</h2>
         <div class="products">
-            <button type="button"> + </button>
             <div class="product">
                 {% for product in products %}
                 <p>{{ product.opn }} {{ product.serial_number }} {{product.model}}
                 {% endfor %}
             </div>
+            <button type="button" class="edit_btn"> + </button>
         </div>
     </div>
 
     <div class="shelf">
         <h2>Testing projects</h2>
         <div class="tcProjects">
-            <button type="button"> + </button>
             <div>
-                {% for item in tc_projects %}
-                <p>{{ item.name }}</p>
-                {% endfor %}
+                <table>
+                    <colgroup>
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="30%">
+                        <col width="30%">
+                    </colgroup>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Testing Features</th>
+                    </tr>
+                    {% for field in tc_projects %}
+                    <tr>
+                        <td>{{ field.name }}</td>
+                        <td>{{ field.category }}</td>
+                        <td>{{ field.description }}</td>
+                        <td>{{ field.tc_feature }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
+            <button type="button" onclick="addNew('tc_project_new')" class="edit_btn"> + </button>
+        </div>
+
+        <div id="tc_project_new">
+            <form action="" method="post">{% csrf_token %}
+                 <table>
+                    <colgroup>
+                        <col width="30%">
+                        <col width="66%">
+                    </colgroup>
+                     {% for field in prj_new %}
+                     <tr>
+                         <td>{{ field.label_tag }}</td>
+                         <td>{{ field }}</td>
+                     </tr>
+                     {% endfor %}
+                </table>
+            </form>
         </div>
     </div>
 </div>

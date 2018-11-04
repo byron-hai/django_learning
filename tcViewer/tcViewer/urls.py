@@ -22,6 +22,6 @@ from django.urls import include, re_path, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include('home.urls')),
-    #re_path(r'^testing/', include('tcViewer.urls'),)
+    re_path(r'^view/', include('tcProject.urls'),)
 ]
 

@@ -1,9 +1,31 @@
 {% extends "base.html" %}
-{% block title %} Login {% endblock %}
+{% load static %}
+{% block title %}Login{% endblock %}
 
 {% block login %}
-vvfbvf
-    <div >
-        <h2> Welcome join us</h2>
-    </div>
+        <div class="login">
+            <button type="button" id="quit" onclick="loginQuit();">x</button><br>
+            <img src="{% static 'images/theme.png' %}" alt="theme">
+            <div id="login_box">
+                <h2>LOGIN</h2>
+                <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                    <input type="text" name="username" placeholder="Username"/><br>
+                    <input type="password" name="password" placeholder="Password"/><br>
+                    <button type="submit" name="login">Login</button>
+                </form>
+                <p>Don't have an account? <span class="change" onclick="loginSwitch('signup')">SIGN UP NOW</span></p>
+            </div>
+
+            <div id="signup_box">
+                <h2>SIGN UP</h2>
+                <form action="{% url 'signup' %}" name="signup" method="post">{% csrf_token %}
+                    <input type="text" name="username" placeholder="Username"/><br>
+                    <input type="email" name="email" placeholder="Email"/><br>
+                    <input type="password" name="password1" placeholder="Password"/><br>
+                    <input type="password" name="password2" placeholder="Confirm Password"/><br>
+                    <button type="submit">Sign up</button>
+                </form>
+                <p>Have an account? <span class="change" onclick="loginSwitch('login')">LOGIN NOW</span></p>
+            </div>
+        </div>
 {% endblock %}

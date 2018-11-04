@@ -4,7 +4,7 @@ body {
     overflow: auto;
     background-color: #f2f4f7;
     font-family: Arial, Times New Roman;
-    margin: 0 5%;
+    margin: 0 4%;
 }
 
 .main {
@@ -22,7 +22,7 @@ body {
 .header .theme {
     display: inline-block;
     padding: 10px;
-    width: 20%;
+    width: 30%;
 }
 
 .header .theme h2 {
@@ -39,7 +39,7 @@ body {
 .header .topNav {
     display: inline-block;
     text-align: right;
-    width: 70%;
+    width: 60%;
     padding: 10px;
     //border: solid 1px Blue;
 }
@@ -62,6 +62,8 @@ body {
 .page_mask {
     display: none;
     position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     background-color: Black;
@@ -171,16 +173,20 @@ body {
     display: inline-block;
     vertical-align: top;
     width: 32%;
-    height: 300px;
+    height: 320px;
     padding-bottom: 10px;
     border: solid 1px #dee9f7;
     border-radius: 16px;
     margin-right: 10px;
 }
 
+.release_info_box {
+    padding: 0 10px;
+}
+
 .release_info_box table {
 
-    margin: 30px 10px;
+    margin: 30px 0 0 10px;
     width: 96%;
 }
 
@@ -190,22 +196,38 @@ body {
     font-size: 18px;
 }
 
-.release_info_box form {
-    display: inline-block;
+.edit_btn {
+    border: solid 1px #bfcbcc;
+    border-radius: 50%;
+    padding: 1px;
+    width: 32px;
+    height: 32px;
 }
 
-.release_info_box select {
+.release_info #release_info_config {
+    display: none;
+    padding: 10px;
+    color: white;
+    background-color: Black;
+    opacity: 0.7;
+}
+
+.release_info #release_info_config select {
     border: none;
-    width: 160px;
-    font-size:18px;
+    width: 120px;
     background-color: White;
+    margin-right: 10px;
+}
+
+.release_info #release_info_config input{
+    width: 120px;
 }
 
 .tc_projects {
     display: inline-block;
     vertical-align: top;
     width: 66%;
-    height: 300px;
+    height: 320px;
     padding-bottom: 10px;
     border: solid 1px #dee9f7;
     border-radius: 16px;
@@ -213,11 +235,12 @@ body {
 
 .tc_info_box {
     overflow: scroll;
+    padding: 0 10px;
 }
 
 .tc_info_box table {
-    width: 98%;
-    margin: 10px;
+    width: 100%;
+    margin: 10px 0;
 }
 
 .tc_info_box table th {
@@ -239,6 +262,25 @@ body {
     text-decoration: underline;
 }
 
+.tc_info_box #tc_category {
+    display: none;
+    padding: 20px;
+    margin-left: 10%;
+    width: 80%;
+    color: White;
+    background-color: Black;
+    opacity: 0.7;
+}
+
+.tc_info_box #tc_category p {
+    margin-bottom: 2px;
+}
+
+.tc_info_box #tc_category button {
+    margin-right: 30px;
+    color: Black;
+}
+
 .releases {
     display: inline-block;
     vertical-align: top;
@@ -251,23 +293,51 @@ body {
 
 .releases .release {
     text-align: left;
-    padding: 10px;
+    //padding: 10px;
 }
 
 .releases .release a {
+    display: inline-block;
     text-decoration: none;
-    padding: 4px;
-    margin: 10px; 20px;
+    padding: 6px;
+    margin: 8px 12px;
 }
-.release button {
-    width: 32px;
-    height: 32px;
-    padding: 1px;
-    font-size: 16px;
+
+.releases .btn {
+    width: 60px;
+    margin: 10px 30px;
 }
 
 .release #swReleaseAdd, #fwReleaseAdd, #appReleaseAdd {
     display: none;
     margin: 10px;
     padding: 10px;
+    color: White;
+    background-color: Black;
+    opacity: 0.7;
+}
+
+.tcProjects table {
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.tcProjects table th {
+    padding: 6px 10px;
+    text-align: left;
+    background-color: #bdd7f9;
+}
+
+.tcProjects table td {
+    background-color: #eaf3ff;
+}
+
+.shelf #tc_project_new {
+    display: none;
+    margin: 10px;
+    width: 60%;
+    padding: 10px;
+    color: White;
+    background-color: Black;
+    opacity: 0.7;
 }

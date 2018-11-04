@@ -16,15 +16,15 @@ class FirmwareType(models.Model):
 
 class FirmwareRelease(models.Model):
     version = models.CharField(max_length=20, unique=True)
-    fw_type = models.ForeignKey(FirmwareType, on_delete=models.SET_NULL, null=True)
-    rel_date = models.DateField(default=timezone.now)
+    fw_type = models.ForeignKey(FirmwareType, on_delete=models.DO_NOTHING)
+    rel_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return "{}_{}".format(self.fw_type, self.version)
 
     class Meta:
         verbose_name_plural = "Firmware Releases"
-        ordering = ['fw_type', '-version']
+        ordering = ['fw_type', '-version', 'rel_date']
 
 
 class SoftwareBranch(models.Model):
@@ -40,15 +40,15 @@ class SoftwareBranch(models.Model):
 
 class SoftwareRelease(models.Model):
     revision = models.CharField(max_length=20, unique=True)
-    branch = models.ForeignKey(SoftwareBranch, on_delete=models.SET_NULL, null=True)
-    rel_date = models.DateField(default=timezone.now)
+    branch = models.ForeignKey(SoftwareBranch, on_delete=models.DO_NOTHING)
+    rel_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return "{}_{}".format(self.branch, self.revision)
 
     class Meta:
         verbose_name_plural = "Software Releases"
-        ordering = ['branch', '-revision']
+        ordering = ['branch', '-revision', '-rel_date']
 
 
 class AppType(models.Model):
@@ -64,12 +64,12 @@ class AppType(models.Model):
 
 class AppRelease(models.Model):
     version = models.CharField(max_length=20, unique=True)
-    branch = models.ForeignKey(AppType, on_delete=models.SET_NULL, null=True)
-    rel_date = models.DateField(default=timezone.now)
+    branch = models.ForeignKey(AppType, on_delete=models.DO_NOTHING)
+    rel_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.version
 
     class Meta:
         verbose_name_plural = "Application Releases"
-        ordering = ['-version']
+        ordering = ['-version', '-rel_date']
