@@ -141,8 +141,15 @@
             <div class="releases">
                 <h3>Software Release</h3>
                 <div class="release">
-                    {% for release in sw_releases %}
-                    <a href="#"> {{ release.branch }}_{{ release.revision }} </a>
+                    {% for branch in sw_branches %}
+                    <ul>
+                        {{ branch.branch }}
+                        {% for release in sw_releases %}
+                        {% if branch.branch == release.branch.branch %}
+                        <li>{{ release.revision }}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
                     {% endfor %}
 
                     <button type="button" onclick="addNew('swReleaseAdd');" class="edit_btn"> + </button>

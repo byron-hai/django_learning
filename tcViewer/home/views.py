@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.utils import timezone
-from sfxRelease.models import SoftwareRelease, FirmwareRelease, AppRelease
+from sfxRelease.models import SoftwareRelease, FirmwareRelease, AppRelease, SoftwareBranch, FirmwareType, AppType
 from sfxProduct.models import Product
 from tcProject.models import TcProject, ProjectCategory, GeneralTcNote
 from tcProject.models import ReleaseTcSummary, TcStatus
@@ -18,6 +18,9 @@ def home(request):
     tc_projects = TcProject.objects.all()
     tc_categories = ProjectCategory.objects.all()
     products = Product.objects.all()
+    sw_branches = SoftwareBranch.objects.all()
+    fw_branches = FirmwareType.objects.all()
+    app_branches = AppType.objects.all()
 
     sw_tc_summary = ReleaseTcSummary.objects.all()
     if sw_tc_summary:
@@ -39,7 +42,10 @@ def home(request):
                                          'sw_new': SoftwareReleaseForm,
                                          'fw_new': FirmwareReleaseForm,
                                          'app_new': AppReleaseForm,
-                                         'prj_new': TcProjectForm})
+                                         'prj_new': TcProjectForm,
+                                         'sw_branches': sw_branches,
+                                         'fw_branches': fw_branches,
+                                         'app_branches': app_branches})
 
 
 def release_add(request, rel_type):
