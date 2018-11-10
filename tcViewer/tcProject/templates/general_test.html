@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title%}demo page{% endblock %}
+{% block title%}Detail Testing page{% endblock %}
 
-{% block general_tests %}
+{% block general_test %}
 <div class="tc_view">
-    <h3>Demo{{ prj_name }}</h3>
-    <p>{{ msg }}</p>
+    <div class="shelf">
+        {% if tc_notes %}
+            {% for note in tc_notes %}
+                <h2>{{ note.project.name }}</h2>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
 </div>
 {% endblock %}

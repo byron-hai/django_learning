@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path(r'tcProjects/', views.testing_projects, name='tc_projects'),
-    re_path(r'^(?P<revision>[\w\d\.-_]+)/(?P<prj_name>[\w\d\.-_]+)/$', views.tc_view, name='tc_view'),
+    path(r'projects/', views.testing_projects, name='tc_projects'),
+    path(r'projects/create', views.create_new_project, name='create_project'),
+    re_path(r'^(?P<sw_revision>[\w\d.-]+)/(?P<tc_name>[\w\d.-]+)/$', views.tc_view, name='tc_view'),
 ]
-

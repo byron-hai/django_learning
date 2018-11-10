@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from sfxRelease.models import FirmwareRelease, SoftwareRelease, AppRelease
 from sfxProduct.models import Product
-from django.utils.text import slugify
 
 
 class ProjectCategory(models.Model):
@@ -26,10 +25,6 @@ class TcProject(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.category, self.name)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(TcProject, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Test Projects"
@@ -69,7 +64,7 @@ class GeneralTcNote(models.Model):
         ('-', '-'),
     )
 
-    name = models.ForeignKey(TcProject, on_delete=models.DO_NOTHING)
+    project = models.ForeignKey(TcProject, on_delete=models.DO_NOTHING)
     device = models.ForeignKey(Product, on_delete=models.DO_NOTHING, blank=True, null=True)
     sw_revision = models.ForeignKey(SoftwareRelease, on_delete=models.DO_NOTHING, blank=True, null=True)
     fw_version = models.ForeignKey(FirmwareRelease, on_delete=models.DO_NOTHING, blank=True, null=True)
@@ -88,7 +83,7 @@ class GeneralTcNote(models.Model):
     note = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return "{prj_name} {sw} {fw} {result} {status} {owner}".format(prj_name=self.name,
+        return "{prj_name} {sw} {fw} {result} {status} {owner}".format(prj_name=self.project,
                                                                        sw=self.sw_revision,
                                                                        fw=self.fw_version,
                                                                        result=self.tc_result,
@@ -97,12 +92,12 @@ class GeneralTcNote(models.Model):
 
     class Meta:
         verbose_name_plural = "Test Notes"
-        ordering = ['name', 'sw_revision', '-schedule_start']
+        ordering = ['-schedule_end', 'sw_revision', 'project']
 
 
 class ReleaseTcSummary(models.Model):
     sw_revision = models.ForeignKey(SoftwareRelease, on_delete=models.DO_NOTHING)
-    tc_projects = models.ManyToManyField(TcProject, blank=True, null=True)
+    tc_projects = models.ManyToManyField(TcProject, blank=True)
     create_date = models.DateField(auto_now_add=True)
     schedule_start = models.DateField(blank=True, null=True)
     schedule_end = models.DateField(blank=True, null=True)
@@ -115,9 +110,10 @@ class ReleaseTcSummary(models.Model):
 
     class Meta:
         verbose_name_plural = 'Release Test Summaries'
-        ordering = ['-sw_revision', 'create_date']
+        ordering = ['-schedule_end', 'sw_revision']
 
 
+'''
 class GroupTcSummary(models.Model):
     name = models.ForeignKey(ProjectCategory, on_delete=models.DO_NOTHING)
     sw_revision = models.ForeignKey(SoftwareRelease, on_delete=models.DO_NOTHING)
@@ -142,4 +138,4 @@ class TcComments(models.Model):
     class Meta:
         verbose_name_plural = "test coments"
         ordering = ('-create_date', '-note_id', 'owner')
-
+'''

@@ -4,7 +4,7 @@ body {
     overflow: auto;
     background-color: #f2f4f7;
     font-family: Arial, Times New Roman;
-    margin: 0 4%;
+    margin: 0 5%;
 }
 
 .main {
@@ -46,7 +46,7 @@ body {
 
 .header .topNav a {
     padding: 10px;
-    margin-right: 60px;
+    margin-right: 40px;
     color: White;
     font-size: 20px;
     text-decoration: none;
@@ -176,16 +176,21 @@ body {
     border-radius: 16px 16px 0 0;
 }
 
+.shelf h4 {
+    margin: 10px 20px;
+    color: #0e3084;
+}
+
 .release_info {
 
     display: inline-block;
     vertical-align: top;
-    width: 32%;
+    width: 30%;
     height: 320px;
     padding-bottom: 10px;
     border: solid 1px #dee9f7;
     border-radius: 16px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .release_info_box {
@@ -203,15 +208,15 @@ body {
     padding: 6px;
     font-size: 18px;
 }
-/*
-.edit_btn {
-    border: solid 1px #bfcbcc;
-    border-radius: 50%;
-    padding: 1px;
-    width: 32px;
-    height: 32px;
+
+.new_btn {
+    background: url("../images/plus.png") no-repeat center center;
+    border: none;
+    width: 24px;
+    height: 24px;
+    margin-left: 20px;
 }
-*/
+
 .edit_btn {
     background: url("../images/edit.png") no-repeat center center;
     width: 30px;
@@ -228,7 +233,8 @@ body {
 
 .release_info #release_info_config select {
     border: none;
-    width: 120px;
+    width: 150px;
+    padding: 4px;
     background-color: White;
     margin-right: 10px;
 }
@@ -240,7 +246,7 @@ body {
 .tc_projects {
     display: inline-block;
     vertical-align: top;
-    width: 66%;
+    width: 68%;
     height: 320px;
     padding-bottom: 10px;
     border: solid 1px #dee9f7;
@@ -276,18 +282,14 @@ body {
     text-decoration: underline;
 }
 
-.tc_info_box #tc_category {
+#tc_category {
     display: none;
     padding: 20px;
-    margin-left: 10%;
+    margin-left: 5%;
     width: 80%;
     color: White;
     background-color: Black;
     opacity: 0.7;
-}
-
-.tc_info_box #tc_category p {
-    margin-bottom: 2px;
 }
 
 .tc_info_box #tc_category button {
@@ -299,22 +301,26 @@ body {
     display: inline-block;
     vertical-align: top;
     border: solid 1px #dee9f7;
-    width: 32%;
+    width: 31%;
     padding-bottom: 10px;
-    margin-right: 10px;
+    margin-right: 20px;
     border-radius: 16px;
 }
 
 .releases .release {
     text-align: left;
-    //padding: 10px;
+    padding: 0 10px;
 }
 
 .releases .release a {
     display: inline-block;
     text-decoration: none;
     padding: 6px;
-    margin: 8px 12px;
+    margin: 0 12px;
+}
+
+.releases .release a:hover {
+    text-decoration: underline;
 }
 
 .btn {
@@ -354,4 +360,12 @@ body {
     color: White;
     background-color: Black;
     opacity: 0.7;
+}
+
+.shelf #tc_project_new input {
+    width: 80%;
+}
+
+.shelf #tc_project_new textarea {
+    padding: 10px;
 }

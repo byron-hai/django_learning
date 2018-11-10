@@ -31,11 +31,11 @@
                     {% endfor %}
                 </table>
             </div>
-            <button type="button" onclick="addNew('tc_project_new')" class="edit_btn"> + </button>
+            <button type="button" onclick="addNew('tc_project_new')" class="new_btn"></button>
         </div>
 
         <div id="tc_project_new">
-            <form action="" method="post">{% csrf_token %}
+            <form action="{% url 'create_project' %}" method="post">{% csrf_token %}
                  <table>
                     <colgroup>
                         <col width="30%">

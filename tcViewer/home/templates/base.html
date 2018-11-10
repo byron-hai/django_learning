@@ -17,10 +17,9 @@
         <div class="topNav">
             <a href="{% url 'home' %}">Dashboard</a>
             <a href="#">Releases</a>
-            <a href="{% url 'tc_projects' %}">TcProjects</a>
+            <a href="{% url 'tc_projects' %}">Projects</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
-                <p>{{user.username | capfirst}}</p>
+                <a href="{% url 'logout' %}">Logout ({{user.username | capfirst}})</a>
             {% else %}
                 <a href="#" onclick="login()" id="">Login/SignUp</a>
             {% endif %}
@@ -59,7 +58,7 @@
         {% block general_test %} {% endblock %}
         {% block overall_report %} {% endblock %}
         {% block tcProjects %} {% endblock %}
-        <hr><br>
+        <hr size="0.6"><br>
     </div>
 </body>
 </html>

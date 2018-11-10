@@ -1,14 +1,11 @@
 # -*_ coding: utf-8 -*-
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth.models import User
-from django.utils import timezone
 from sfxRelease.models import SoftwareRelease, FirmwareRelease, AppRelease, SoftwareBranch, FirmwareType, AppType
 from sfxProduct.models import Product
-from tcProject.models import ProjectCategory, GeneralTcNote
-from tcProject.models import ReleaseTcSummary, TcStatus
-from .forms import SignupForm, SoftwareReleaseForm, FirmwareReleaseForm, AppReleaseForm, \
-    ReleaseTcSummaryForm
+from tcProject.models import ProjectCategory, GeneralTcNote, ReleaseTcSummary, TcStatus, TcProject
+from .forms import SignupForm, SoftwareReleaseForm, FirmwareReleaseForm, AppReleaseForm,\
+    ReleaseTcSummaryForm, GeneralTcNoteForm
 
 
 def home(request):
@@ -16,6 +13,7 @@ def home(request):
     fw_releases = FirmwareRelease.objects.all()
     app_release = AppRelease.objects.all()
     tc_categories = ProjectCategory.objects.all()
+    tc_projects = TcProject.objects.all()
     products = Product.objects.all()
     sw_branches = SoftwareBranch.objects.all()
     fw_branches = FirmwareType.objects.all()
@@ -34,6 +32,7 @@ def home(request):
                                          'app_releases': app_release,
                                          'sw_tc_summary': sw_tc_summary,
                                          'tc_categories': tc_categories,
+                                         'tc_projects': tc_projects,
                                          're_tc_projects': re_tc_projects,
                                          'products': products,
                                          'signup': SignupForm,
@@ -100,6 +99,7 @@ def get_sum_info(request):
         fw_releases = FirmwareRelease.objects.all()
         app_release = AppRelease.objects.all()
         tc_categories = ProjectCategory.objects.all()
+        tc_projects = TcProject.objects.all()
         products = Product.objects.all()
         sw_branches = SoftwareBranch.objects.all()
         fw_branches = FirmwareType.objects.all()
@@ -112,6 +112,7 @@ def get_sum_info(request):
                                              'app_releases': app_release,
                                              'sw_tc_summary': sw_tc_summary,
                                              'tc_categories': tc_categories,
+                                             'tc_projects': tc_projects,
                                              're_tc_projects': re_tc_projects,
                                              'products': products,
                                              'signup': SignupForm,
@@ -121,6 +122,27 @@ def get_sum_info(request):
                                              'sw_branches': sw_branches,
                                              'fw_branches': fw_branches,
                                              'app_branches': app_branches})
+    else:
+        return HttpResponse('Oops. Not a valid request')
+
+
+def create_testing_notes(request, sw_revision):
+    if request.method == 'POST':
+        projects = TcProject.objects.all()
+        tc_prjs = ''
+        if projects:
+            tc_prjs = [project for project in projects if request.POST.get(project.name, '') == 'on']
+
+        for project in tc_prjs:
+            form = GeneralTcNoteForm()
+            note = form.save(commit=False)
+            note.project = project
+            note.sw_revision = SoftwareRelease.objects.get(revision=sw_revision)
+            note.tc_status = TcStatus.objects.get(name='Not-Started')
+            note.owner = request.user
+            note.save()
+
+        return redirect('home')
     else:
         return HttpResponse('Oops. Not a valid request')
 
@@ -159,5 +181,3 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
-
-

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from sfxRelease.models import SoftwareRelease, FirmwareRelease, AppRelease
-from tcProject.models import ReleaseTcSummary
+from tcProject.models import ReleaseTcSummary, GeneralTcNote
 
 
 class SignupForm(UserCreationForm):
@@ -35,3 +35,9 @@ class ReleaseTcSummaryForm(forms.ModelForm):
     class Meta:
         model = ReleaseTcSummary
         fields = ('sw_revision', 'schedule_start', 'schedule_end', 'status')
+
+
+class GeneralTcNoteForm(forms.ModelForm):
+    class Meta:
+        model = GeneralTcNote
+        fields = ('project', 'sw_revision', 'tc_status', 'owner')

@@ -5,11 +5,11 @@ from .models import *
 
 
 class GeneralTcNoteAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'sw_revision', 'fw_version', 'app_version', 'tc_result', 'tc_status', 'owner')
+    list_display = ('id', 'project', 'sw_revision', 'fw_version', 'app_version', 'tc_result', 'tc_status', 'owner')
 
 
 class RelTcSumAdmin(admin.ModelAdmin):
-    list_display = ('sw_revision', 'schedule_start', 'schedule_end', 'finish_date', 'status', 'progress')
+    list_display = ('sw_revision', 'create_date', 'schedule_start', 'schedule_end', 'finish_date', 'status', 'progress')
 
 
 admin.site.register(ProjectCategory)
