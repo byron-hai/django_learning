@@ -128,3 +128,18 @@ class GroupTcSummary(models.Model):
     finish_date = models.DateField(blank=True, null=True)
     status = models.ForeignKey(TcStatus, on_delete=models.DO_NOTHING)
     progress = models.SmallIntegerField(default=0)   # Definition based on tc_projects' progresses
+
+
+class TcComments(models.Model):
+    content = models.TextField()
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    create_date = models.DateField(auto_now_add=True)
+    note_id = models.IntegerField()
+
+    def __str__(self):
+        return "{} {} {}".format(self.note_id, self.owner, self.create_date, self.content)
+
+    class Meta:
+        verbose_name_plural = "test coments"
+        ordering = ('-create_date', '-note_id', 'owner')
+
