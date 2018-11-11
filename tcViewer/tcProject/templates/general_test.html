@@ -6,12 +6,85 @@
 <div class="tc_view">
     <div class="shelf">
         {% if tc_notes %}
-            {% for note in tc_notes %}
-                <h2>{{ note.project.name }}</h2>
-            {% endfor %}
+        {% for note in tc_notes %}
+        <h2>{{ note.project.name }}</h2>
+        <div>
+            <div class="tc_env">
+                <table class="tc_env">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="60%">
+                    </colgroup>
+
+                    <tr>
+                        <td>Testing Features</td>
+                        <td>{{ note.project.tc_feature }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Release Info</td>
+                        <td>Software-revision: {{ note.sw_revision.revision }}
+                            Firmware-version: {{ note.fw_version.version }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Device Info</td>
+                        <td>OPN: {{ note.device.opn}} SN: {{ note.device.sn }} Capacity: {{ note.device.capacity }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Testing Env</td>
+                        <td>Machine-model: Needed, OS: {{ note.tc_os }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tc_note">
+                <table class="tc_note">
+                    <colgroup>
+                        <col width="20%">
+                        <col width="8%">
+                        <col width="8%">
+                        <col width="16%">
+                        <col width="9%">
+                        <col width="9%">
+                        <col width="9%">
+                        <col width="9%">
+                        <col width="10%">
+                    </colgroup>
+
+                    <tr>
+                        <th>Feature</th>
+                        <th>Loop(s)</th>
+                        <th>Result</th>
+                        <th>Schedule</th>
+                        <th>Status</th>
+                        <th>Progress</th>
+                        <th>Finish_date</th>
+                        <th>Owner</th>
+                        <th>Link</th>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>{{ note.tc_loop }}</td>
+                        <td>{{ note.tc_result }}</td>
+                        <td>{{ note.schedule_start }} - {{ note.schedule_end }}</td>
+                        <td>{{ note.tc_status }}</td>
+                        <td>{{ note.tc_progress }}</td>
+                        <td>{{ note.finish_date }}</td>
+                        <td>{{ note.owner.username }}</td>
+                        <td>{{ note.tc_link }}</td>
+                    </tr>
+                </table>
+                <h4>Note</h4>
+                <p>tc_link Need a link table</p>
+            </div>
+        </div>
+
+        {% endfor %}
         {% endif %}
     </div>
-
-
 </div>
 {% endblock %}

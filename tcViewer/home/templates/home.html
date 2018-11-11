@@ -47,6 +47,15 @@
                                 <progress value="{{ sw_tc_summary.progress }}" max="100"></progress>
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>Report</td>
+                            <td>
+                                <a href="{% url 'tc_report' sw_revision=sw_tc_summary.sw_revision.revision %}">
+                                    <img src="{% static 'images/report.png' %}" alt="report"/>
+                                </a>
+                            </td>
+                        </tr>
                     </table>
                     {% else %}
                     <p>
@@ -71,7 +80,7 @@
             </div>
 
             <div class="tc_projects">
-                <h3>Testing Items</h3>
+                <h3>Testing Items <button type="button" onclick="addNew('tc_category')" class="new_btn"></button></h3>
                 {% if re_tc_projects %}
                     <div class="tc_info_box">
                         <table>
@@ -112,12 +121,10 @@
                             </tr>
                             {% endfor %}
                         </table>
-                        <button type="button" onclick="addNew('tc_category')" class="new_btn"></button>
                     </div>
                 {% else %}
                     <div class="tc_info_box">
-                        <p> No Data Recorded. Add new test plans?</p>
-                        <button type="button" onclick="addNew('tc_category')" class="new_btn"></button>
+                        <p> No Data Recorded. Add new test plan by touch "+" button</p>
                     </div>
                 {% endif %}
                 <div id="tc_category">
@@ -142,7 +149,9 @@
         <h2>Release dashboard</h2>
         <div>
             <div class="releases">
-                <h3>Software Release</h3>
+                <h3>Software Release
+                    <button type="button" onclick="addNew('swReleaseAdd');" class="new_btn"></button>
+                </h3>
                 <div class="release">
                     {% for branch in sw_branches %}
                     <h4>{{ branch.branch }}</h4>
@@ -155,7 +164,6 @@
                     </div>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('swReleaseAdd');" class="new_btn"></button>
                     <div id="swReleaseAdd">
                         <form action="{% url 'release_add' rel_type='sw_release' %}" method="post">{% csrf_token %}
                             <table>
@@ -183,7 +191,9 @@
             </div>
 
             <div class="releases">
-                <h3>Firmware Release</h3>
+                <h3>Firmware Release
+                    <button type="button" onclick="addNew('fwReleaseAdd')" class="new_btn"></button>
+                </h3>
                 <div class="release">
                     {% for branch in fw_branches %}
                     <h4>{{ branch.name }}</h4>
@@ -196,7 +206,6 @@
                     </div>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('fwReleaseAdd')" class="new_btn"></button>
                     <div id="fwReleaseAdd">
                         <form action="{% url 'release_add' rel_type='fw_release' %}" method="post">{% csrf_token %}
                             <table>
@@ -224,7 +233,9 @@
             </div>
 
             <div class="releases">
-                <h3>Application Release</h3>
+                <h3>Application Release
+                    <button type="button" onclick="addNew('appReleaseAdd')" class="new_btn"></button>
+                </h3>
                 <div class="release">
                     {% for branch in app_branches %}
                     <h4>{{ branch.branch }}</h4>
@@ -237,7 +248,6 @@
                     </div>
                     {% endfor %}
 
-                    <button type="button" onclick="addNew('appReleaseAdd')" class="new_btn"></button>
                     <div id="appReleaseAdd">
                         <form action="{% url 'release_add' rel_type='app_release' %}" method="post">{% csrf_token %}
                             <table>
@@ -275,6 +285,13 @@
                 {% endfor %}
             </div>
             <button type="button" class="new_btn"></button>
+        </div>
+    </div>
+
+    <div class="shelf">
+        <h2>Testing Projects</h2>
+        <div class="">
+            <p>testing jobs filter</p>
         </div>
     </div>
 </div>

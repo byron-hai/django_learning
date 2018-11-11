@@ -44,3 +44,13 @@ def tc_view(request, sw_revision, tc_name):
         return render(request, 'general_test.html', {'tc_notes': tc_notes})
     else:
         return HttpResponse('Oops. Nothing found for your request')
+
+
+def tc_report(request, sw_revision):
+    if request.method == 'GET':
+        sw_release = SoftwareRelease.objects.get(revision=sw_revision)
+        tc_notes = GeneralTcNote.objects.filter(sw_revision=sw_release)
+
+        return render(request, 'release_report.html', {'tc_notes': tc_notes})
+    else:
+        return HttpResponse('Oops. Nothing found')

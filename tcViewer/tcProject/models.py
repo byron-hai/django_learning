@@ -103,7 +103,7 @@ class ReleaseTcSummary(models.Model):
     schedule_end = models.DateField(blank=True, null=True)
     finish_date = models.DateField(blank=True, null=True)
     status = models.ForeignKey(TcStatus, on_delete=models.DO_NOTHING)
-    progress = models.SmallIntegerField(default=0)  # Definition based on Group test processes, 
+    progress = models.SmallIntegerField(default=0)  # Definition based on Group test processes,
 
     def __str__(self):
         return "{sw} {status} {progress}".format(sw=self.sw_revision, status=self.status, progress=self.progress)
